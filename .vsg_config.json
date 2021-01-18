@@ -1,0 +1,24 @@
+{
+  "file_list": [
+    "src/*.vhdl",
+    "testbench/*.vhdl"
+  ],
+  "rule":{
+    "global":{
+      "indentSize": 4,
+      "case": "lower"
+    },
+    "constant_007": {
+      "disable": true
+    },
+    "constant_004": {
+      "case": "upper"
+    },
+    "process_029": {
+      "disable": true
+    },
+    "signal_007": {
+      "disable": true
+    }
+  }
+}

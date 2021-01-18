@@ -1,0 +1,11 @@
+# GHDL simulation directory
+**/simul
+
+# Vagrant tmp files
+.vagrant/
+
+# Vivado output files and directories
+synth/*
+
+# Python output files
+**/__pycache__/
