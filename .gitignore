@@ -9,3 +9,4 @@ synth/*
 
 # Python output files
 **/__pycache__/
+*.log
