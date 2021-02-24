@@ -1,4 +1,5 @@
 # simulation
+COMPONENT = 
 SIMDIR = simul
 SIMBIN = $(COMPONENT)_tb
 

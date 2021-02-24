@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -eu
+
+SIMDIR="simul"
+GHDLFLAGS="--ieee=standard -fsynopsys --warn-no-vital-generic --workdir=$SIMDIR"
+
+COMPONENT="$1"
+SIMBIN=$COMPONENT"_tb"
+TESTFILES=testbench/$COMPONENT"_tb.vhdl"
+
+if [[ "$COMPONENT" == "vector" ]]; then
+	SRCFILES="src/plot/vector.vhdl"
+else
+	SRCFILES="src/$COMPONENT/cordic.vhdl src/$COMPONENT/adder.vhdl src/$COMPONENT/register_mem.vhdl src/$COMPONENT/shifter.vhdl src/$COMPONENT/cordic_motor.vhdl src/$COMPONENT/pre_processing.vhdl src/$COMPONENT/post_processing.vhdl"
+fi;
+
+mkdir -p $SIMDIR
+ghdl -i $GHDLFLAGS --work=work $TESTFILES $SRCFILES
+ghdl -m $GHDLFLAGS --work=work $SIMBIN
