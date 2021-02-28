@@ -39,9 +39,9 @@ begin
 
   DUT: entity work.axes
         port map (
-			clk   => clk_aux,
-			rst   => rst_aux,
-			data => data_aux,
+			clk     => clk_aux,
+			rst     => rst_aux,
+			data    => data_aux,
 			address => address_aux
         );
 

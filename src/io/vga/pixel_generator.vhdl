@@ -36,7 +36,7 @@ architecture pixel_generator_arq of pixel_generator is
 
 begin
 
-	process(clk, rst)
+	translator: process(clk, rst)
 	begin
 		if rst = '1' then
 			red_reg   <= (others => '0');
