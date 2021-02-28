@@ -17,6 +17,9 @@ else
 	SRCFILES="src/$COMPONENT/cordic.vhdl src/$COMPONENT/adder.vhdl src/$COMPONENT/register_mem.vhdl src/$COMPONENT/shifter.vhdl src/$COMPONENT/cordic_motor.vhdl src/$COMPONENT/pre_processing.vhdl src/$COMPONENT/post_processing.vhdl"
 fi;
 
+STOPTIME="$2"
+SIMFLAGS="--stop-time=$STOPTIME --vcdgz=$SIMDIR/$SIMBIN.vcdgz"
+
 mkdir -p $SIMDIR
-ghdl -i $GHDLFLAGS --work=work $TESTFILES $SRCFILES
-ghdl -m $GHDLFLAGS --work=work $SIMBIN
+ghdl -r $GHDLFLAGS $SIMBIN $SIMFLAGS
+

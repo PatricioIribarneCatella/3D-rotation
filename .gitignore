@@ -1,5 +1,5 @@
 # GHDL simulation directory
-**/simul
+simul/
 
 # Vagrant tmp files
 .vagrant/
