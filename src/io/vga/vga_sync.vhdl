@@ -44,7 +44,7 @@ architecture vga_sync_arq of vga_sync is
 	signal h_count : unsigned(9 downto 0) := (others => '0');
 
 	-- state signals
-	signal h_end , v_end , pixel_tick: std_logic;
+	signal h_end, v_end, pixel_tick: std_logic;
 
 begin
 
@@ -69,7 +69,7 @@ begin
 					h_count <= (others => '0');
 				else
 					h_count <= h_count + 1;
-				end if ;
+				end if;
 			end if;
 		end if;
 	end process;

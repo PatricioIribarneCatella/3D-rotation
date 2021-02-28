@@ -13,6 +13,8 @@ if [[ "$COMPONENT" == "vector" ]]; then
 	SRCFILES="src/plot/vector.vhdl"
 elif [[ "$COMPONENT" == "axes" ]]; then
 	SRCFILES="src/plot/axes.vhdl"
+elif [[ "$COMPONENT" == "vector_eraser" ]]; then
+	SRCFILES="src/plot/vector_eraser.vhdl"
 elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
