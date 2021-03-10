@@ -19,6 +19,8 @@ elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
 	SRCFILES="src/io/vga/vga_sync.vhdl"
+elif [[ "$COMPONENT" == "line_drawer" ]]; then
+	SRCFILES="src/plot/line_drawer.vhdl"
 else
 	SRCFILES="src/$COMPONENT/cordic.vhdl src/$COMPONENT/adder.vhdl src/$COMPONENT/register_mem.vhdl src/$COMPONENT/shifter.vhdl src/$COMPONENT/cordic_motor.vhdl src/$COMPONENT/pre_processing.vhdl src/$COMPONENT/post_processing.vhdl"
 fi;

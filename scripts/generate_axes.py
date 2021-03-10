@@ -11,7 +11,7 @@ AXES_FILE_PATH = "axes_std_logic-{}x{}.txt"
 
 def generate_axes(size):
     """
-    Generates an "size"x"size" image to
+    Generates a "size"x"size" image to
     store in the ROM axes plot memory
     """
 
@@ -53,6 +53,6 @@ def main(size):
 
 if __name__ == '__main__':
 
-    size = sys.argv[1]
-    
-    main(int(size))
+    size = int(sys.argv[1])
+ 
+    main(size)
