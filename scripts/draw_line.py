@@ -98,14 +98,22 @@ def plot_line_v3(x0, y0, x1, y1):
     dx = x1 - x0
 
     right = dx > 0
+    print("right: {}".format(right))
+
     if not right:
         dx = -dx
+
+    print("dx: {}".format(dx))
 
     dy = y1 - y0
 
     down = dy > 0
+    print("down: {}".format(down))
+
     if down:
         dy = -dy
+
+    print("dy: {}".format(dy))
 
     err = dx + dy
 
@@ -115,12 +123,16 @@ def plot_line_v3(x0, y0, x1, y1):
     while True:
         plot(x, y)
 
+        print("err: {}".format(err))
+
         if x == x1 and y == y1:
             break
 
         e2 = err << 1
+        print("e2: {}".format(e2))
 
         if e2 >= dy:
+            print("e2 >= dy")
             err += dy
             if right:
                 x += 1
@@ -128,6 +140,7 @@ def plot_line_v3(x0, y0, x1, y1):
                 x -= 1
 
         if e2 <= dx:
+            print("e2 <= dx")
             err += dx
             if down:
                 y += 1

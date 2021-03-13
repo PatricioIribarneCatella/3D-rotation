@@ -15,18 +15,30 @@ elif [[ "$COMPONENT" == "axes" ]]; then
 	SRCFILES="src/plot/axes.vhdl"
 elif [[ "$COMPONENT" == "vector_eraser" ]]; then
 	SRCFILES="src/plot/vector_eraser.vhdl"
+elif [[ "$COMPONENT" == "line_drawer" ]]; then
+	SRCFILES="src/plot/line_drawer.vhdl"
+elif [[ "$COMPONENT" == "vector_drawer" ]]; then
+	SRCFILES="src/plot/line_drawer.vhdl
+		  src/plot/vector_drawer.vhdl"
+elif [[ "$COMPONENT" == "coordinate_to_pixel" ]]; then
+	SRCFILES="src/plot/coordinate_to_pixel.vhdl"
+elif [[ "$COMPONENT" == "coordinate_to_vector" ]]; then
+	SRCFILES="src/plot/coordinate_to_pixel.vhdl
+		  src/plot/line_drawer.vhdl
+		  src/plot/vector_drawer.vhdl
+		  src/plot/coordinate_to_vector.vhdl"
 elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
 	SRCFILES="src/io/vga/vga_sync.vhdl"
-elif [[ "$COMPONENT" == "line_drawer" ]]; then
-	SRCFILES="src/plot/line_drawer.vhdl"
-elif [[ "$COMPONENT" == "vector_drawer" ]]; then
-	SRCFILES="src/plot/vector_drawer.vhdl"
-elif [[ "$COMPONENT" == "coordinate_to_pixel" ]]; then
-	SRCFILES="src/plot/coordinate_to_pixel.vhdl"
 else
-	SRCFILES="src/$COMPONENT/cordic.vhdl src/$COMPONENT/adder.vhdl src/$COMPONENT/register_mem.vhdl src/$COMPONENT/shifter.vhdl src/$COMPONENT/cordic_motor.vhdl src/$COMPONENT/pre_processing.vhdl src/$COMPONENT/post_processing.vhdl"
+	SRCFILES="src/cordic/cordic.vhdl
+		  src/cordic/adder.vhdl
+		  src/cordic/register_mem.vhdl
+		  src/cordic/shifter.vhdl
+		  src/cordic/cordic_motor.vhdl
+		  src/cordic/pre_processing.vhdl
+		  src/cordic/post_processing.vhdl"
 fi;
 
 mkdir -p $SIMDIR
