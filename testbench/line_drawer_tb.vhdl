@@ -9,7 +9,7 @@ end entity line_drawer_tb;
 architecture line_drawer_tb_arq of line_drawer_tb is
 
     constant DATA_SIZE_TB : natural := 1;
-    constant PIXEL_SIZE_TB : natural := 4;
+    constant PIXEL_SIZE_TB : natural := 3;
 
     signal clk_aux : std_logic := '0';
     signal rst_aux : std_logic := '1';
@@ -17,13 +17,13 @@ architecture line_drawer_tb_arq of line_drawer_tb is
     signal data_aux     : std_logic_vector(DATA_SIZE_TB - 1 downto 0) := "0";
 
 	signal pixel_x0_aux : std_logic_vector(PIXEL_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(7, PIXEL_SIZE_TB));
+		:= std_logic_vector(to_unsigned(4, PIXEL_SIZE_TB));
 	signal pixel_y0_aux : std_logic_vector(PIXEL_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(7, PIXEL_SIZE_TB));
+		:= std_logic_vector(to_unsigned(3, PIXEL_SIZE_TB));
 	signal pixel_x1_aux : std_logic_vector(PIXEL_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(2, PIXEL_SIZE_TB));
+		:= std_logic_vector(to_unsigned(7, PIXEL_SIZE_TB));
 	signal pixel_y1_aux : std_logic_vector(PIXEL_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(2, PIXEL_SIZE_TB));
+		:= std_logic_vector(to_unsigned(1, PIXEL_SIZE_TB));
 
 	signal x_out_aux, y_out_aux : std_logic_vector(PIXEL_SIZE_TB - 1 downto 0);
 

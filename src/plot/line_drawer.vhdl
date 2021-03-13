@@ -39,7 +39,8 @@ architecture line_drawer_arq of line_drawer is
 			x_updated, y_updated, x_aux, y_aux : signed(PIXEL_SIZE - 1 downto 0);
 
 	signal err_next, err, err_init, err_shift_2,
-			err_plus_dy, err_aux: signed(PIXEL_SIZE - 1 downto 0);
+			err_plus_dy, err_aux: signed(PIXEL_SIZE downto 0);
+
 	signal err_2_greater_dy, err_2_lower_dx : std_logic;
 
 	signal right, down : std_logic;
@@ -116,9 +117,13 @@ begin
 	-- error data circuit --
 	------------------------
 
-	err_init <= dx + dy;
+	-- '0' must be added to ensure
+	-- that the result of shifting it
+	-- does not overflow (it can be
+	-- considered as a negative value when its not)
+	err_init <= ('0' & dx) + ('0' & dy);
 
-	err_shift_2 <= err(PIXEL_SIZE - 2 downto 0) & '0'; -- err << 1
+	err_shift_2 <= err(PIXEL_SIZE - 1 downto 0) & '0'; -- err << 1
 
 	err_2_greater_dy <= '1' when err_shift_2 >= dy else '0';
 	err_2_lower_dx <= '1' when err_shift_2 <= dx else '0';
