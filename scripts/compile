@@ -27,6 +27,8 @@ elif [[ "$COMPONENT" == "coordinate_to_vector" ]]; then
 		  src/plot/line_drawer.vhdl
 		  src/plot/vector_drawer.vhdl
 		  src/plot/coordinate_to_vector.vhdl"
+elif [[ "$COMPONENT" == "plot_control" ]]; then
+	SRCFILES="src/plot/plot_control.vhdl"
 elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
