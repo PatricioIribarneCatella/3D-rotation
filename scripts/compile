@@ -9,7 +9,9 @@ COMPONENT="$1"
 SIMBIN=$COMPONENT"_tb"
 TESTFILES=testbench/$COMPONENT"_tb.vhdl"
 
-if [[ "$COMPONENT" == "vector" ]]; then
+if [[ "$COMPONENT" == "main_control" ]]; then
+	SRCFILES="src/main_control.vhdl"
+elif [[ "$COMPONENT" == "vector" ]]; then
 	SRCFILES="src/plot/vector.vhdl"
 elif [[ "$COMPONENT" == "axes" ]]; then
 	SRCFILES="src/plot/axes.vhdl"
