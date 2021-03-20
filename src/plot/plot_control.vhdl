@@ -24,20 +24,19 @@ entity plot_control is
 		write_enable   : out std_logic;
 		clear_start    : out std_logic;
 		clear_select   : out std_logic;
-		plot_select    : out std_logic
+		plot_select    : out std_logic;
+		plot_available : out std_logic
 	);
 end entity plot_control;
 
 architecture plot_control_arq of plot_control is
 
-	constant ZERO : std_logic_vector(9 downto 0) := (others => '0');
 	constant IMAGE_SIZE : natural := 2**IMAGE_PIXEL_SIZE;
-	constant MONITOR_WIDTH : natural := 800; -- total number of pixels in a line
 	constant MONITOR_HEIGHT : natural := 525; -- total number of lines in a frame
 
 	type state is (
 		IDLE_STATE, READING_STATE,
-		CLEARING_STATE, WRITING_STATE
+		CLEARING_STATE, WRITING_STATE, READY_STATE
 	);
     signal plotting_state, plotting_state_next : state;
 
@@ -59,29 +58,25 @@ begin
 	begin
 		case plotting_state is
 			when IDLE_STATE =>
-				if data_available = '1' and
-					(to_integer(unsigned(pixel_y)) >= IMAGE_SIZE) then
+				if data_available = '1' then
 					plotting_state_next <= CLEARING_STATE;
 					plot_select <= '0';
 					write_enable <= '1';
 					clear_select <= '1';
 					clear_start <= '1';
-				elsif (to_integer(unsigned(pixel_x)) = MONITOR_WIDTH and
-						(to_integer(unsigned(pixel_y)) < IMAGE_SIZE or
-						to_integer(unsigned(pixel_y)) = MONITOR_HEIGHT)) then
-					plotting_state_next <= READING_STATE;
-					write_enable <= '0';
-					plot_select <= '1';
+					plot_available <= '0';
 				else
 					plotting_state_next <= IDLE_STATE;
 					write_enable <= '0';
 					plot_select <= '0';
+					plot_available <= '1';
 				end if;
 			when READING_STATE =>
-				if to_integer(unsigned(pixel_x)) = IMAGE_SIZE then
+				if to_integer(unsigned(pixel_y)) = IMAGE_SIZE then
 					plotting_state_next <= IDLE_STATE;
 					write_enable <= '0';
 					plot_select <= '0';
+					plot_available <= '1';
 				else 
 					plotting_state_next <= READING_STATE;
 					write_enable <= '0';
@@ -89,6 +84,7 @@ begin
 					plot_select <= '1';
 					clear_select <= '0';
 					clear_start <= '0';
+					plot_available <= '0';
 				end if;
 			when CLEARING_STATE =>
 				if clear_done = '1' then
@@ -108,7 +104,7 @@ begin
 				end if;
 			when WRITING_STATE =>
 				if write_done = '1' then
-					plotting_state_next <= IDLE_STATE;
+					plotting_state_next <= READY_STATE;
 					plot_select <= '0';
 					write_enable <= '0';
 					write_start <= '0';
@@ -118,6 +114,21 @@ begin
 					write_start <= '1';
 					clear_select <= '0';
 					clear_start <= '0';
+				end if;
+			when READY_STATE =>
+				if to_integer(unsigned(pixel_y)) = MONITOR_HEIGHT then
+					plotting_state_next <= READING_STATE;
+					write_enable <= '0';
+					write_start <= '0';
+					plot_select <= '1';
+					clear_select <= '0';
+					clear_start <= '0';
+					plot_available <= '0';
+				else
+					plotting_state_next <= READY_STATE;
+					plot_select <= '0';
+					write_enable <= '0';
+					write_start <= '0';
 				end if;
 		end case;
 	end process;
