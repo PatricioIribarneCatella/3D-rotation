@@ -35,7 +35,9 @@ elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
 	SRCFILES="src/io/vga/vga_sync.vhdl"
-else
+elif [[ "$COMPONENT" == "pre_processing" ]]; then
+	SRCFILES="src/cordic/pre_processing.vhdl"
+elif [[ "$COMPONENT" == "cordic" ]]; then
 	SRCFILES="src/cordic/cordic.vhdl
 		  src/cordic/adder.vhdl
 		  src/cordic/register_mem.vhdl
@@ -43,6 +45,9 @@ else
 		  src/cordic/cordic_motor.vhdl
 		  src/cordic/pre_processing.vhdl
 		  src/cordic/post_processing.vhdl"
+else
+	echo "component not found"
+	exit 1
 fi;
 
 mkdir -p $SIMDIR

@@ -35,9 +35,9 @@ begin
 	--	pixel_y = (-y + 1) * 2**PIXEL_SIZE / RANGE_WIDTH
 	--
 	-- where RANGE_WIDTH its the width of vector coordinates
-	-- in this case, this range its x, y : [-1, 1]
+	-- in this case, this range its for x, y : [-1, 1]
 	--
-	-- as the coordinates "x" and "y" are codified into
+	-- as the coordinates "x" and "y" are encoded into
 	-- fixed point numbers with 2 bits for the integer part
 	-- and 14 bits for the decimal part, the ONE
 	-- its formatted to follow this convention
