@@ -12,7 +12,7 @@ architecture cordic_tb_arq of cordic_tb is
 
     signal clk_aux  : std_logic := '0';
     signal rst_aux  : std_logic := '1';
-    signal load_aux : std_logic := '1';
+    signal start_aux : std_logic := '1';
     signal done_aux : std_logic;
 
     -- x: 1
@@ -37,14 +37,14 @@ architecture cordic_tb_arq of cordic_tb is
 begin
 
     rst_aux  <= '0' after 10 ns;
-    load_aux <= '0' after 40 ns;
+    start_aux <= '0' after 40 ns;
     clk_aux  <= not clk_aux after 20 ns;
 
   DUT: entity work.cordic
         port map (
             clk   => clk_aux,
             rst   => rst_aux,
-            load  => load_aux,
+            start => start_aux,
             x_0   => x_0_aux,
             y_0   => y_0_aux,
             angle => angle_aux,

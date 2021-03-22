@@ -14,8 +14,8 @@
 -- the angle its encoded as 16 bits number
 -- with the following algorithm:
 --
--- angle => (radianes * 2^16) / PI or
---          (angulo * 2^16) / 180
+-- angle => (radians * 2^16) / PI or
+--          (angle * 2^16) / 180
 
 library IEEE;
     use IEEE.std_logic_1164.all;
@@ -26,17 +26,17 @@ entity cordic_motor is
 		ITER_MAX : natural := 16
 	);
     port(
-		clk  : in  std_logic;
-		rst  : in  std_logic;
-		mode : in  std_logic;
-		load : in  std_logic;
-        x_0  : in  std_logic_vector(15 downto 0);
-        y_0  : in  std_logic_vector(15 downto 0);
-        z_0  : in  std_logic_vector(15 downto 0);
-        x    : out std_logic_vector(15 downto 0);
-		y    : out std_logic_vector(15 downto 0);
-		z    : out std_logic_vector(15 downto 0);
-		done : out std_logic
+		clk   : in  std_logic;
+		rst   : in  std_logic;
+		mode  : in  std_logic;
+		start : in  std_logic;
+		x_0   : in  std_logic_vector(15 downto 0);
+		y_0   : in  std_logic_vector(15 downto 0);
+		z_0   : in  std_logic_vector(15 downto 0);
+		x     : out std_logic_vector(15 downto 0);
+		y     : out std_logic_vector(15 downto 0);
+		z     : out std_logic_vector(15 downto 0);
+		done  : out std_logic
     );
 end entity cordic_motor;
 
@@ -67,6 +67,7 @@ architecture cordic_motor_arq of cordic_motor is
 	);
 
 	signal iter : integer := 0;
+	signal load : std_logic := '1';
 
 	signal d_i : std_logic;
 	signal d_i_rot_mode : std_logic;
@@ -90,7 +91,7 @@ architecture cordic_motor_arq of cordic_motor is
 	signal z_tan : std_logic_vector(SIZE - 1 downto 0);
 	signal op_add_z : std_logic;
 
-	type state is (INIT, ROT);
+	type state is (INIT, ROT, IDLE);
     signal cordic_state : state;
 
 begin
@@ -99,17 +100,28 @@ begin
 	begin
 		if rst = '1' then
 			iter <= 0;
-			cordic_state <= INIT;
+			load <= '1';
+			cordic_state <= IDLE;
 		elsif rising_edge(clk) then
 			case cordic_state is
 				when INIT =>
 					cordic_state <= ROT;
-					iter <= 0;
+					load <= '0';
 				when ROT =>
 					if iter < ITER_MAX then
+						cordic_state <= ROT;
 						iter <= iter + 1;
+					else
+						cordic_state <= IDLE;
 					end if;
-					cordic_state <= ROT;
+				when IDLE =>
+					if start = '1' then
+						cordic_state <= INIT;
+					else
+						cordic_state <= IDLE;
+						iter <= 0;
+						load <= '1';
+					end if;
 			end case;
 		end if;
 	end process;

@@ -19,15 +19,15 @@ library IEEE;
 
 entity cordic is
     port(
-		clk   : in  std_logic;
-		rst   : in  std_logic;
-		load  : in  std_logic;
-        x_0   : in  std_logic_vector(15 downto 0);
-        y_0   : in  std_logic_vector(15 downto 0);
-        angle : in  std_logic_vector(16 downto 0); -- one more bit to hold large angles
-        x     : out std_logic_vector(15 downto 0);
-		y     : out std_logic_vector(15 downto 0);
-		done  : out std_logic
+		clk    : in  std_logic;
+		rst    : in  std_logic;
+		start  : in  std_logic;
+		x_0    : in  std_logic_vector(15 downto 0);
+		y_0    : in  std_logic_vector(15 downto 0);
+		angle  : in  std_logic_vector(16 downto 0); -- one more bit to hold large angles
+		x      : out std_logic_vector(15 downto 0);
+		y      : out std_logic_vector(15 downto 0);
+		done   : out std_logic
     );
 end entity cordic;
 
@@ -56,16 +56,16 @@ begin
 		
 	MOTOR: entity work.cordic_motor
 		port map (
-			clk  => clk,
-			rst  => rst,
-			mode => ROTATION_MODE,
-			load => load,
-			x_0  => x_aux,
-			y_0  => y_aux,
-			z_0  => angle_aux,
-			x    => x_aux_post,
-			y    => y_aux_post,
-			done => done
+			clk   => clk,
+			rst   => rst,
+			mode  => ROTATION_MODE,
+			start => start,
+			x_0   => x_aux,
+			y_0   => y_aux,
+			z_0   => angle_aux,
+			x     => x_aux_post,
+			y     => y_aux_post,
+			done  => done
 		);
 
 	POST_PROCESSING: entity work.post_processing
