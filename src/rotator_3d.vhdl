@@ -87,10 +87,10 @@ begin
 			N => SIZE
 		)
 		port map(
-			clk => clk,
-			rst => rst,
-			enable => done_ry,
-			data_in => x_out_ry,
+			clk      => clk,
+			rst      => rst,
+			enable   => done_ry,
+			data_in  => x_out_ry,
 			data_out => z_out_reg
 		);
 
