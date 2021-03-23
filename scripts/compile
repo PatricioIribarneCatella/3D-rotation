@@ -11,6 +11,15 @@ TESTFILES=testbench/$COMPONENT"_tb.vhdl"
 
 if [[ "$COMPONENT" == "main_control" ]]; then
 	SRCFILES="src/main_control.vhdl"
+elif [[ "$COMPONENT" == "rotator_3d" ]]; then
+	SRCFILES="src/rotator_3d.vhdl
+		  src/cordic/cordic.vhdl
+		  src/cordic/adder.vhdl
+		  src/cordic/register_mem.vhdl
+		  src/cordic/shifter.vhdl
+		  src/cordic/cordic_motor.vhdl
+		  src/cordic/pre_processing.vhdl
+		  src/cordic/post_processing.vhdl"
 elif [[ "$COMPONENT" == "vector" ]]; then
 	SRCFILES="src/plot/vector.vhdl"
 elif [[ "$COMPONENT" == "axes" ]]; then

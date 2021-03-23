@@ -150,6 +150,7 @@ begin
 		port map(
 			data_in => x_aux,
 			data_out => x_i,
+			enable => '1',
 			clk => clk,
 			rst => rst
 		);
@@ -188,6 +189,7 @@ begin
 		port map(
 			data_in => y_aux,
 			data_out => y_i,
+			enable => '1',
 			clk => clk,
 			rst => rst
 		);
@@ -230,6 +232,7 @@ begin
 		port map(
 			data_in => z_aux,
 			data_out => z_i,
+			enable => '1',
 			clk => clk,
 			rst => rst
 		);
