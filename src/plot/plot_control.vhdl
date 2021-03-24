@@ -13,18 +13,17 @@ entity plot_control is
 		IMAGE_PIXEL_SIZE : natural := 4
 	);
 	port(
-		clk            : in std_logic;
-		rst            : in std_logic;
-		pixel_x        : in std_logic_vector(9 downto 0); -- from VGA sync
-		pixel_y        : in std_logic_vector(9 downto 0); -- from VGA sync
-		clear_done     : in std_logic;
-		write_done     : in std_logic;
-		data_available : in std_logic;
+		clk            : in  std_logic;
+		rst            : in  std_logic;
+		pixel_x        : in  std_logic_vector(9 downto 0); -- from VGA sync
+		pixel_y        : in  std_logic_vector(9 downto 0); -- from VGA sync
+		clear_done     : in  std_logic;
+		write_done     : in  std_logic;
+		data_available : in  std_logic;
 		write_start    : out std_logic;
 		write_enable   : out std_logic;
 		clear_start    : out std_logic;
 		clear_select   : out std_logic;
-		plot_select    : out std_logic;
 		plot_available : out std_logic
 	);
 end entity plot_control;
@@ -60,7 +59,6 @@ begin
 			when IDLE_STATE =>
 				if data_available = '1' then
 					plotting_state_next <= CLEARING_STATE;
-					plot_select <= '0';
 					write_enable <= '1';
 					clear_select <= '1';
 					clear_start <= '1';
@@ -68,20 +66,17 @@ begin
 				else
 					plotting_state_next <= IDLE_STATE;
 					write_enable <= '0';
-					plot_select <= '0';
 					plot_available <= '1';
 				end if;
 			when READING_STATE =>
 				if to_integer(unsigned(pixel_y)) = IMAGE_SIZE then
 					plotting_state_next <= IDLE_STATE;
 					write_enable <= '0';
-					plot_select <= '0';
 					plot_available <= '1';
 				else 
 					plotting_state_next <= READING_STATE;
 					write_enable <= '0';
 					write_start <= '0';
-					plot_select <= '1';
 					clear_select <= '0';
 					clear_start <= '0';
 					plot_available <= '0';
@@ -89,14 +84,12 @@ begin
 			when CLEARING_STATE =>
 				if clear_done = '1' then
 					plotting_state_next <= WRITING_STATE;
-					plot_select <= '0';
 					write_enable <= '1';
 					write_start <= '1';
 					clear_select <= '0';
 					clear_start <= '0';
 				else
 					plotting_state_next <= CLEARING_STATE;
-					plot_select <= '0';
 					write_enable <= '1';
 					write_start <= '0';
 					clear_select <= '1';
@@ -105,11 +98,9 @@ begin
 			when WRITING_STATE =>
 				if write_done = '1' then
 					plotting_state_next <= READY_STATE;
-					plot_select <= '0';
 					write_enable <= '0';
 					write_start <= '0';
 				else
-					plot_select <= '0';
 					write_enable <= '1';
 					write_start <= '1';
 					clear_select <= '0';
@@ -120,13 +111,11 @@ begin
 					plotting_state_next <= READING_STATE;
 					write_enable <= '0';
 					write_start <= '0';
-					plot_select <= '1';
 					clear_select <= '0';
 					clear_start <= '0';
 					plot_available <= '0';
 				else
 					plotting_state_next <= READY_STATE;
-					plot_select <= '0';
 					write_enable <= '0';
 					write_start <= '0';
 				end if;

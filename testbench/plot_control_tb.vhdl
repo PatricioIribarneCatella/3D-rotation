@@ -26,7 +26,6 @@ architecture plot_control_tb_arq of plot_control_tb is
 	signal write_enable_aux   : std_logic;
 	signal clear_start_aux    : std_logic;
 	signal clear_select_aux   : std_logic;
-	signal plot_select_aux    : std_logic;
 	signal plot_available_aux : std_logic;
 
 begin
@@ -69,7 +68,6 @@ begin
 			write_enable => write_enable_aux,
 			clear_start => clear_start_aux,
 			clear_select => clear_select_aux,
-			plot_select => plot_select_aux,
 			plot_available => plot_available_aux
         );
 
