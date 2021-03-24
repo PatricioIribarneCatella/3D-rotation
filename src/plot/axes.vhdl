@@ -33,7 +33,8 @@ end entity axes;
 
 architecture axes_arq of axes is
 
-	constant ADDR_HALF_SIZE : natural := ADDR_SIZE / 2;
+	constant ADDR_HALF_SIZE  : natural := ADDR_SIZE / 2;
+	constant IMAGE_HALF_SIZE : natural := (2**ADDR_HALF_SIZE) / 2;
 
 begin
 
@@ -42,11 +43,11 @@ begin
 		if rst = '1' then
 			data <= (others => '0');
 		elsif rising_edge(clk) then
-			if to_integer(unsigned(address(ADDR_SIZE - 1 downto ADDR_HALF_SIZE))) = ADDR_HALF_SIZE or
-			   to_integer(unsigned(address(ADDR_SIZE - 1 downto ADDR_HALF_SIZE))) = ADDR_HALF_SIZE - 1 then
+			if to_integer(unsigned(address(ADDR_SIZE - 1 downto ADDR_HALF_SIZE))) = IMAGE_HALF_SIZE or
+			   to_integer(unsigned(address(ADDR_SIZE - 1 downto ADDR_HALF_SIZE))) = IMAGE_HALF_SIZE - 1 then
 				data <= std_logic_vector(to_unsigned(1, DATA_SIZE));
-			elsif to_integer(unsigned(address(ADDR_HALF_SIZE - 1 downto 0))) = ADDR_HALF_SIZE or
-				  to_integer(unsigned(address(ADDR_HALF_SIZE - 1 downto 0))) = ADDR_HALF_SIZE - 1 then
+			elsif to_integer(unsigned(address(ADDR_HALF_SIZE - 1 downto 0))) = IMAGE_HALF_SIZE or
+				  to_integer(unsigned(address(ADDR_HALF_SIZE - 1 downto 0))) = IMAGE_HALF_SIZE - 1 then
 				data <= std_logic_vector(to_unsigned(1, DATA_SIZE));
 			else
 				data <= (others => '0');
