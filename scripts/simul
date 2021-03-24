@@ -10,6 +10,7 @@ SIMBIN=$COMPONENT"_tb"
 
 STOPTIME="$2"
 SIMFLAGS="--stop-time=$STOPTIME --vcdgz=$SIMDIR/$SIMBIN.vcdgz"
+#SIMFLAGS="--disp-time --stop-time=$STOPTIME --vcdgz=$SIMDIR/$SIMBIN.vcdgz"
 
 mkdir -p $SIMDIR
 ghdl -r $GHDLFLAGS $SIMBIN $SIMFLAGS

@@ -93,27 +93,31 @@ def plot_line_v2(x0, y0, x1, y1):
             err += dx
             y += sy
 
-def plot_line_v3(x0, y0, x1, y1):
+def plot_line_v3(x0, y0, x1, y1, debug=False):
 
     dx = x1 - x0
 
     right = dx > 0
-    print("right: {}".format(right))
+    if debug:
+        print("right: {}".format(right))
 
     if not right:
         dx = -dx
 
-    print("dx: {}".format(dx))
+    if debug:
+        print("dx: {}".format(dx))
 
     dy = y1 - y0
 
     down = dy > 0
-    print("down: {}".format(down))
+    if debug:
+        print("down: {}".format(down))
 
     if down:
         dy = -dy
 
-    print("dy: {}".format(dy))
+    if debug:
+        print("dy: {}".format(dy))
 
     err = dx + dy
 
@@ -123,16 +127,19 @@ def plot_line_v3(x0, y0, x1, y1):
     while True:
         plot(x, y)
 
-        print("err: {}".format(err))
+        if debug:
+            print("err: {}".format(err))
 
         if x == x1 and y == y1:
             break
 
         e2 = err << 1
-        print("e2: {}".format(e2))
+        if debug:
+            print("e2: {}".format(e2))
 
         if e2 >= dy:
-            print("e2 >= dy")
+            if debug:
+                print("e2 >= dy")
             err += dy
             if right:
                 x += 1
@@ -140,21 +147,22 @@ def plot_line_v3(x0, y0, x1, y1):
                 x -= 1
 
         if e2 <= dx:
-            print("e2 <= dx")
+            if debug:
+                print("e2 <= dx")
             err += dx
             if down:
                 y += 1
             else:
                 y -= 1
 
-def main(x0, y0, x1, y1):
+def main(x0, y0, x1, y1, debug):
 
     print("v1")
     plot_line_v1(x0, y0, x1, y1)
     print("v2")
     plot_line_v2(x0, y0, x1, y1)
     print("v3")
-    plot_line_v3(x0, y0, x1, y1)
+    plot_line_v3(x0, y0, x1, y1, debug=debug)
 
 if __name__ == '__main__':
     """
@@ -164,13 +172,14 @@ if __name__ == '__main__':
     ref: https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases
     """
 
-    if len(sys.argv) < 5 or len(sys.argv) > 5:
-        print("Usage: ./draw_line.py x0 y0 x1 y1")
+    if len(sys.argv) < 5:
+        print("Usage: ./draw_line.py x0 y0 x1 y1 [-d]")
         sys.exit(0)
 
     x0 = int(sys.argv[1])
     y0 = int(sys.argv[2])
     x1 = int(sys.argv[3])
     y1 = int(sys.argv[4])
+    debug = True if len(sys.argv) == 6 and sys.argv[5] == '-d' else False
 
-    main(x0, y0, x1, y1)
+    main(x0, y0, x1, y1, debug)

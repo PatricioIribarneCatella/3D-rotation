@@ -11,6 +11,18 @@ TESTFILES=testbench/$COMPONENT"_tb.vhdl"
 
 if [[ "$COMPONENT" == "main_control" ]]; then
 	SRCFILES="src/main_control.vhdl"
+elif [[ "$COMPONENT" == "plot_generator" ]]; then
+	SRCFILES="src/plot_generator.vhdl
+		  src/plot/axes.vhdl
+		  src/plot/vector.vhdl
+		  src/plot/line_drawer.vhdl
+		  src/plot/plot_control.vhdl
+		  src/plot/vector_drawer.vhdl
+		  src/plot/vector_eraser.vhdl
+		  src/plot/coordinate_to_pixel.vhdl
+		  src/plot/coordinate_to_vector.vhdl
+		  src/io/vga/vga_sync.vhdl
+		  src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "rotator_3d" ]]; then
 	SRCFILES="src/rotator_3d.vhdl
 		  src/cordic/cordic.vhdl
