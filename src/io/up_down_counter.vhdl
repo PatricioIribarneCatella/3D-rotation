@@ -13,12 +13,12 @@ library IEEE;
 
 entity up_down_counter is
 	port(
-		clk        : in  std_logic;
-		rst        : in  std_logic;
-		up_sw      : in  std_logic;
-		down_sw    : in  std_logic;
-		angle      : out std_logic_vector(16 downto 0);
-		start_read : in  std_logic
+		clk      : in  std_logic;
+		rst      : in  std_logic;
+		up_sw    : in  std_logic;
+		down_sw  : in  std_logic;
+		angle    : out std_logic_vector(16 downto 0);
+		enable   : in  std_logic
 	);
 end entity up_down_counter;
 
@@ -56,7 +56,7 @@ begin
 		port map(
 			clk      => clk,
 			rst      => rst,
-			enable   => start_read,
+			enable   => enable,
 			data_in  => next_angle,
 			data_out => current_angle
 		);
