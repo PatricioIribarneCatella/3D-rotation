@@ -60,6 +60,8 @@ elif [[ "$COMPONENT" == "pixel_generator" ]]; then
 	SRCFILES="src/io/vga/pixel_generator.vhdl"
 elif [[ "$COMPONENT" == "vga_sync" ]]; then
 	SRCFILES="src/io/vga/vga_sync.vhdl"
+elif [[ "$COMPONENT" == "transmitter" ]]; then
+	SRCFILES="src/io/uart/transmitter.vhdl"
 elif [[ "$COMPONENT" == "up_down_counter" ]]; then
 	SRCFILES="src/io/up_down_counter.vhdl
 		  src/cordic/register_mem.vhdl"
