@@ -11,6 +11,11 @@ TESTFILES=testbench/$COMPONENT"_tb.vhdl"
 
 if [[ "$COMPONENT" == "main_control" ]]; then
 	SRCFILES="src/main_control.vhdl"
+elif [[ "$COMPONENT" == "console" ]]; then
+	SRCFILES="src/console.vhdl
+		  src/io/uart/uart_tx.vhdl
+		  src/io/uart/transmitter.vhdl
+		  src/io/uart/time_generator.vhdl"
 elif [[ "$COMPONENT" == "angle_generator" ]]; then
 	SRCFILES="src/angle_generator.vhdl
 		  src/io/up_down_counter.vhdl
