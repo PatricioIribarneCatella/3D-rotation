@@ -64,6 +64,10 @@ elif [[ "$COMPONENT" == "transmitter" ]]; then
 	SRCFILES="src/io/uart/transmitter.vhdl"
 elif [[ "$COMPONENT" == "time_generator" ]]; then
 	SRCFILES="src/io/uart/time_generator.vhdl"
+elif [[ "$COMPONENT" == "uart_tx" ]]; then
+	SRCFILES="src/io/uart/uart_tx.vhdl
+		  src/io/uart/transmitter.vhdl
+		  src/io/uart/time_generator.vhdl"
 elif [[ "$COMPONENT" == "up_down_counter" ]]; then
 	SRCFILES="src/io/up_down_counter.vhdl
 		  src/cordic/register_mem.vhdl"
