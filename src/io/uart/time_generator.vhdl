@@ -12,7 +12,7 @@ library IEEE;
 
 entity time_generator is
 	generic(
-		F : natural := 50000; -- Frecuency in KHz
+		F : natural := 50000; -- frequency in KHz
 		MIN_BAUD : natural := 1200
 	);
 	port(
