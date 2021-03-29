@@ -107,7 +107,7 @@ begin
 					clear_start <= '0';
 				end if;
 			when READY_STATE =>
-				if to_integer(unsigned(pixel_y)) = MONITOR_HEIGHT then
+				if to_integer(unsigned(pixel_y)) = (MONITOR_HEIGHT - 1) then
 					plotting_state_next <= READING_STATE;
 					write_enable <= '0';
 					write_start <= '0';
