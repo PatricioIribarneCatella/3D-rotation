@@ -9,7 +9,35 @@ COMPONENT="$1"
 SIMBIN=$COMPONENT"_tb"
 TESTFILES=testbench/$COMPONENT"_tb.vhdl"
 
-if [[ "$COMPONENT" == "main_control" ]]; then
+if [[ "$COMPONENT" == "main" ]]; then
+	SRCFILES="src/main.vhdl
+		  src/main_control.vhdl
+		  src/angle_generator.vhdl
+		  src/rotator_3d.vhdl
+		  src/plot_generator.vhdl
+		  src/console.vhdl
+		  src/io/up_down_counter.vhdl
+		  src/io/uart/uart_tx.vhdl
+		  src/io/uart/transmitter.vhdl
+		  src/io/uart/time_generator.vhdl
+		  src/io/vga/vga_sync.vhdl
+		  src/io/vga/pixel_generator.vhdl
+		  src/cordic/cordic.vhdl
+		  src/cordic/adder.vhdl
+		  src/cordic/register_mem.vhdl
+		  src/cordic/shifter.vhdl
+		  src/cordic/cordic_motor.vhdl
+		  src/cordic/pre_processing.vhdl
+		  src/cordic/post_processing.vhdl
+		  src/plot/axes.vhdl
+		  src/plot/vector.vhdl
+		  src/plot/line_drawer.vhdl
+		  src/plot/plot_control.vhdl
+		  src/plot/vector_drawer.vhdl
+		  src/plot/vector_eraser.vhdl
+		  src/plot/coordinate_to_pixel.vhdl
+		  src/plot/coordinate_to_vector.vhdl"
+elif [[ "$COMPONENT" == "main_control" ]]; then
 	SRCFILES="src/main_control.vhdl"
 elif [[ "$COMPONENT" == "console" ]]; then
 	SRCFILES="src/console.vhdl
