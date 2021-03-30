@@ -8,7 +8,17 @@ You can install [GHDL](https://ghdl.readthedocs.io/en/latest/), [GTKWave](http:/
 
 ## Run
 
+### Compile
 
+```bash
+$ ./scripts/compile COMPONENT_NAME
+```
+
+### Simulate
+
+```bash
+$ ./scripts/simul COMPONENT_NAME SIMUL_TIME
+```
 
 ## Visualize
 
