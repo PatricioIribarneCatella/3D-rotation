@@ -55,6 +55,9 @@ architecture main_arq of main is
 
 	signal alpha_aux, beta_aux, gamma_aux : std_logic_vector(ANGLE_SIZE - 1 downto 0);
 	signal x_out_aux, y_out_aux, z_out_aux : std_logic_vector(COORD_SIZE - 1 downto 0);
+	signal x_in_monitor, y_in_monitor : std_logic_vector(COORD_SIZE - 1 downto 0);
+	signal vector_coordinates_in, vector_coordinates_out :
+		std_logic_vector(COORD_SIZE * 2 - 1 downto 0);
 
 begin
 
@@ -105,6 +108,29 @@ begin
             done  => rotate_done_aux
         );
 
+	-- latch the input when data its available
+	--
+	-- this is due to the fact thar "CORDIC rotator"
+	-- might change the output signal after the "done"
+	-- signal changes from 1 to 0
+
+	vector_coordinates_in <= y_out_aux & z_out_aux;
+
+	INPUT_DATA_MEM : entity work.register_mem
+		generic map(
+			N => COORD_SIZE * 2
+		)
+		port map(
+            clk      => clk,
+            rst      => rst,
+			enable   => rotate_done_aux,
+			data_in  => vector_coordinates_in,
+			data_out => vector_coordinates_out
+		);
+
+	x_in_monitor <= vector_coordinates_out(COORD_SIZE * 2 - 1 downto COORD_SIZE);
+	y_in_monitor <= vector_coordinates_out(COORD_SIZE - 1 downto 0);
+
 	MONITOR: entity work.plot_generator
 		generic map (
 			PIXEL_SIZE => PIXEL_SIZE
@@ -112,8 +138,8 @@ begin
         port map (
             clk			   => clk,
             rst			   => rst,
-			x_in	       => y_out_aux,
-			y_in	       => z_out_aux,
+			x_in	       => x_in_monitor,
+			y_in	       => y_in_monitor,
 			start_draw     => start_draw_aux,
 			draw_done      => draw_done_aux,
 			plot_available => plot_available_aux,
