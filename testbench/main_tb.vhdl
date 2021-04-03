@@ -8,6 +8,8 @@ end entity main_tb;
 
 architecture main_tb_arq of main_tb is
 
+	constant PIXEL_SIZE_TB : natural := 4; -- image of 16x16
+
     signal clk_aux : std_logic := '0';
     signal rst_aux : std_logic := '1';
 
@@ -26,10 +28,13 @@ architecture main_tb_arq of main_tb is
 
 begin
 
-    rst_aux     <= '0' after 5 ns;
-    clk_aux     <= not clk_aux after 10 ns; -- 50 MHz clock
+    rst_aux <= '0' after 5 ns;
+    clk_aux <= not clk_aux after 10 ns; -- 50 MHz clock
 
-  DUT: entity work.main
+	DUT: entity work.main
+		generic map (
+			PIXEL_SIZE => PIXEL_SIZE_TB
+		)
         port map (
             clk       => clk_aux,
             rst       => rst_aux,

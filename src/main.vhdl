@@ -14,6 +14,9 @@ library IEEE;
     use IEEE.numeric_std.all;
 
 entity main is
+	generic(
+		PIXEL_SIZE : natural := 8
+	);
 	port(
 		clk       : in  std_logic;
 		rst       : in  std_logic;
@@ -34,7 +37,6 @@ end entity main;
 
 architecture main_arq of main is
 
-	constant PIXEL_SIZE : natural := 8;
 	constant COORD_SIZE : natural := 16;
 	constant ANGLE_SIZE : natural := 17;
 
