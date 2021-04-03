@@ -58,8 +58,9 @@ architecture main_arq of main is
 	signal alpha_aux, beta_aux, gamma_aux : std_logic_vector(ANGLE_SIZE - 1 downto 0);
 	signal x_out_aux, y_out_aux, z_out_aux : std_logic_vector(COORD_SIZE - 1 downto 0);
 	signal x_in_monitor, y_in_monitor : std_logic_vector(COORD_SIZE - 1 downto 0);
+	signal x_in_console, y_in_console, z_in_console : std_logic_vector(COORD_SIZE - 1 downto 0);
 	signal vector_coordinates_in, vector_coordinates_out :
-		std_logic_vector(COORD_SIZE * 2 - 1 downto 0);
+		std_logic_vector(COORD_SIZE * 3 - 1 downto 0);
 
 begin
 
@@ -116,11 +117,11 @@ begin
 	-- might change the output signal after the "done"
 	-- signal changes from 1 to 0
 
-	vector_coordinates_in <= y_out_aux & z_out_aux;
+	vector_coordinates_in <= x_out_aux & y_out_aux & z_out_aux;
 
 	INPUT_DATA_MEM : entity work.register_mem
 		generic map(
-			N => COORD_SIZE * 2
+			N => 3 * COORD_SIZE
 		)
 		port map(
             clk      => clk,
@@ -140,8 +141,8 @@ begin
         port map (
             clk			   => clk,
             rst			   => rst,
-			x_in	       => x_in_monitor,
-			y_in	       => y_in_monitor,
+			x_in	       => x_in_monitor, -- Y out from rotator
+			y_in	       => y_in_monitor, -- Z out from rotator
 			start_draw     => start_draw_aux,
 			draw_done      => draw_done_aux,
 			plot_available => plot_available_aux,
@@ -152,14 +153,18 @@ begin
 			blue_out       => blue_out
         );
 
+	x_in_console <= vector_coordinates_out(COORD_SIZE * 3 - 1 downto COORD_SIZE * 2);
+	y_in_console <= vector_coordinates_out(COORD_SIZE * 2 - 1 downto COORD_SIZE);
+	z_in_console <= vector_coordinates_out(COORD_SIZE - 1 downto 0);
+
 	CONSOLE: entity work.console
 		port map (
 			clk        => clk,
 			rst        => rst,
 			start_send => start_draw_aux,
-			x		   => x_out_aux,
-			y		   => y_out_aux,
-			z		   => z_out_aux,
+			x		   => x_in_console,
+			y		   => y_in_console,
+			z		   => z_in_console,
 			tx         => tx
 		);
 

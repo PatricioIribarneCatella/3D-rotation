@@ -74,7 +74,6 @@ begin
 					next_state <= DRAWING;
 					start_read <= '0';
 					start_rotate <= '0';
-					start_draw <= '1';
 				else
 					next_state <= ROTATING;
 					start_read <= '0';
