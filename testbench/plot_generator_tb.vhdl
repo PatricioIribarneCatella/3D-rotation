@@ -14,12 +14,12 @@ architecture plot_generator_tb_arq of plot_generator_tb is
     signal clk_aux : std_logic := '0';
     signal rst_aux : std_logic := '1';
 
-    -- x = 0.875 -> pixel_x = 15
+    -- x = -0.5758 -> pixel_x = 3
 	signal x_in_aux : std_logic_vector(COORD_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(14336, COORD_SIZE_TB));
-    -- y = 0.625 -> pixel_y = 3
+		:= std_logic_vector(to_signed(-9434, COORD_SIZE_TB));
+    -- y = 0.8175 -> pixel_y = 1
 	signal y_in_aux : std_logic_vector(COORD_SIZE_TB - 1 downto 0)
-		:= std_logic_vector(to_unsigned(10240, COORD_SIZE_TB));
+		:= std_logic_vector(to_unsigned(13384, COORD_SIZE_TB));
 
 	signal start_draw_aux       : std_logic := '0';
 	signal draw_done_aux        : std_logic;
