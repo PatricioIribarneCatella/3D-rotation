@@ -5,7 +5,7 @@ simul/
 .vagrant/
 
 # Vivado output files and directories
-synth/*
+synth/rotation-3d*
 
 # Python output files
 **/__pycache__/

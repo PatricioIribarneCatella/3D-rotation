@@ -1,0 +1,32 @@
+# User Constraints File for Rotation-3D project
+# considering a Nexys 2 Spartan-3E
+
+# clock
+NET "clk" LOC = B8;
+
+# reset
+NET "rst" LOC = BTNR;
+
+#switches
+NET "sw_x_pos" LOC = R17;
+NET "sw_x_neg" LOC = N17;
+NET "sw_y_pos" LOC = L13;
+NET "sw_y_neg" LOC = L14;
+NET "sw_z_pos" LOC = K17;
+NET "sw_z_neg" LOC = K18;
+
+# VGA
+NET "hsync" LOC = T4;
+NET "vsync" LOC = U3;
+NET "red_out[0]" LOC = R9;
+NET "red_out[1]" LOC = T8;
+NET "red_out[2]" LOC = R8;
+NET "green_out[0]" LOC = N8;
+NET "green_out[1]" LOC = P8;
+NET "green_out[2]" LOC = P6;
+NET "blue_out[0]" LOC = U5;
+NET "blue_out[1]" LOC = U4;
+
+# UART
+NET "tx" LOC = P9;
+
