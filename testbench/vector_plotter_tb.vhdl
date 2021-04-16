@@ -3,10 +3,10 @@ library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
 
-entity vector_drawer_tb is
-end entity vector_drawer_tb;
+entity vector_plotter_tb is
+end entity vector_plotter_tb;
 
-architecture vector_drawer_tb_arq of vector_drawer_tb is
+architecture vector_plotter_tb_arq of vector_plotter_tb is
 
     constant DATA_SIZE_TB : natural := 1;
     constant PIXEL_SIZE_TB : natural := 4;
@@ -47,7 +47,7 @@ begin
 					-- FOURTH_CUADRANT final point
 				   std_logic_vector(to_unsigned(13, PIXEL_SIZE_TB)) after 840 ns;
 
-  DUT: entity work.vector_drawer
+  DUT: entity work.vector_plotter
 		generic map(
 			DATA_SIZE => DATA_SIZE_TB,
 			PIXEL_SIZE => PIXEL_SIZE_TB
@@ -64,4 +64,4 @@ begin
 			done => done_aux
         );
 
-end architecture vector_drawer_tb_arq;
+end architecture vector_plotter_tb_arq;

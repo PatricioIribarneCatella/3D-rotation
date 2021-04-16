@@ -1,4 +1,4 @@
--- vector drawer
+-- vector plotter
 --
 -- it represents the component in charge of
 -- drawing a vector from its origin (relative to the size of the image)
@@ -8,7 +8,7 @@ library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
 
-entity vector_drawer is
+entity vector_plotter is
 	generic(
 		DATA_SIZE  : natural := 1;
 		PIXEL_SIZE : natural := 2
@@ -24,9 +24,9 @@ entity vector_drawer is
 		start       : in std_logic;
 		done        : out std_logic
 	);
-end entity vector_drawer;
+end entity vector_plotter;
 
-architecture vector_drawer_arq of vector_drawer is
+architecture vector_plotter_arq of vector_plotter is
 
 	constant IMAGE_SIZE : natural := 2**PIXEL_SIZE;
 
@@ -78,7 +78,7 @@ begin
 						unsigned(pixel_x) >= VERT_AXES_RIGHT and unsigned(pixel_y) >= HORIZ_AXES_DOWN;
 
 
-	LINE_DRAWER: entity work.line_drawer
+	LINE_PLOTTER: entity work.line_plotter
 		generic map(
 			DATA_SIZE => DATA_SIZE,
 			PIXEL_SIZE => PIXEL_SIZE
@@ -97,4 +97,4 @@ begin
 			done        => done
 		);
 
-end architecture vector_drawer_arq;
+end architecture vector_plotter_arq;

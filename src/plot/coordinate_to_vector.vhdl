@@ -56,7 +56,7 @@ begin
 
 	address_out <= y_out_aux & x_out_aux;
 
-	VEC_DRAWER: entity work.vector_drawer
+	VEC_PLOTTER: entity work.vector_plotter
 		generic map(
 			DATA_SIZE => DATA_SIZE,
 			PIXEL_SIZE => PIXEL_SIZE

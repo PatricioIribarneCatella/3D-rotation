@@ -33,7 +33,7 @@ if [[ "$COMPONENT" == "main" ]]; then
 		  src/plot/vector.vhdl
 		  src/plot/line_plotter.vhdl
 		  src/plot/plot_control.vhdl
-		  src/plot/vector_drawer.vhdl
+		  src/plot/vector_plotter.vhdl
 		  src/plot/vector_eraser.vhdl
 		  src/plot/coordinate_to_pixel.vhdl
 		  src/plot/coordinate_to_vector.vhdl"
@@ -54,7 +54,7 @@ elif [[ "$COMPONENT" == "plot_generator" ]]; then
 		  src/plot/vector.vhdl
 		  src/plot/line_plotter.vhdl
 		  src/plot/plot_control.vhdl
-		  src/plot/vector_drawer.vhdl
+		  src/plot/vector_plotter.vhdl
 		  src/plot/vector_eraser.vhdl
 		  src/plot/coordinate_to_pixel.vhdl
 		  src/plot/coordinate_to_vector.vhdl
@@ -77,15 +77,15 @@ elif [[ "$COMPONENT" == "vector_eraser" ]]; then
 	SRCFILES="src/plot/vector_eraser.vhdl"
 elif [[ "$COMPONENT" == "line_plotter" ]]; then
 	SRCFILES="src/plot/line_plotter.vhdl"
-elif [[ "$COMPONENT" == "vector_drawer" ]]; then
+elif [[ "$COMPONENT" == "vector_plotter" ]]; then
 	SRCFILES="src/plot/line_plotter.vhdl
-		  src/plot/vector_drawer.vhdl"
+		  src/plot/vector_plotter.vhdl"
 elif [[ "$COMPONENT" == "coordinate_to_pixel" ]]; then
 	SRCFILES="src/plot/coordinate_to_pixel.vhdl"
 elif [[ "$COMPONENT" == "coordinate_to_vector" ]]; then
 	SRCFILES="src/plot/coordinate_to_pixel.vhdl
 		  src/plot/line_plotter.vhdl
-		  src/plot/vector_drawer.vhdl
+		  src/plot/vector_plotter.vhdl
 		  src/plot/coordinate_to_vector.vhdl"
 elif [[ "$COMPONENT" == "plot_control" ]]; then
 	SRCFILES="src/plot/plot_control.vhdl"
