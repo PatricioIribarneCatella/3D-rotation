@@ -31,7 +31,7 @@ if [[ "$COMPONENT" == "main" ]]; then
 		  src/cordic/post_processing.vhdl
 		  src/plot/axes.vhdl
 		  src/plot/vector.vhdl
-		  src/plot/line_drawer.vhdl
+		  src/plot/line_plotter.vhdl
 		  src/plot/plot_control.vhdl
 		  src/plot/vector_drawer.vhdl
 		  src/plot/vector_eraser.vhdl
@@ -52,7 +52,7 @@ elif [[ "$COMPONENT" == "plot_generator" ]]; then
 	SRCFILES="src/plot_generator.vhdl
 		  src/plot/axes.vhdl
 		  src/plot/vector.vhdl
-		  src/plot/line_drawer.vhdl
+		  src/plot/line_plotter.vhdl
 		  src/plot/plot_control.vhdl
 		  src/plot/vector_drawer.vhdl
 		  src/plot/vector_eraser.vhdl
@@ -75,16 +75,16 @@ elif [[ "$COMPONENT" == "axes" ]]; then
 	SRCFILES="src/plot/axes.vhdl"
 elif [[ "$COMPONENT" == "vector_eraser" ]]; then
 	SRCFILES="src/plot/vector_eraser.vhdl"
-elif [[ "$COMPONENT" == "line_drawer" ]]; then
-	SRCFILES="src/plot/line_drawer.vhdl"
+elif [[ "$COMPONENT" == "line_plotter" ]]; then
+	SRCFILES="src/plot/line_plotter.vhdl"
 elif [[ "$COMPONENT" == "vector_drawer" ]]; then
-	SRCFILES="src/plot/line_drawer.vhdl
+	SRCFILES="src/plot/line_plotter.vhdl
 		  src/plot/vector_drawer.vhdl"
 elif [[ "$COMPONENT" == "coordinate_to_pixel" ]]; then
 	SRCFILES="src/plot/coordinate_to_pixel.vhdl"
 elif [[ "$COMPONENT" == "coordinate_to_vector" ]]; then
 	SRCFILES="src/plot/coordinate_to_pixel.vhdl
-		  src/plot/line_drawer.vhdl
+		  src/plot/line_plotter.vhdl
 		  src/plot/vector_drawer.vhdl
 		  src/plot/coordinate_to_vector.vhdl"
 elif [[ "$COMPONENT" == "plot_control" ]]; then

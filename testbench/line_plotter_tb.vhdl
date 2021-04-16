@@ -3,10 +3,10 @@ library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
 
-entity line_drawer_tb is
-end entity line_drawer_tb;
+entity line_plotter_tb is
+end entity line_plotter_tb;
 
-architecture line_drawer_tb_arq of line_drawer_tb is
+architecture line_plotter_tb_arq of line_plotter_tb is
 
     constant DATA_SIZE_TB : natural := 1;
     constant PIXEL_SIZE_TB : natural := 3;
@@ -36,7 +36,7 @@ begin
     clk_aux  <= not clk_aux after 20 ns;
 	start_aux <= '1' after 10 ns, '0' after 280 ns;
 
-  DUT: entity work.line_drawer
+  DUT: entity work.line_plotter
 		generic map(
 			DATA_SIZE => DATA_SIZE_TB,
 			PIXEL_SIZE => PIXEL_SIZE_TB
@@ -55,4 +55,4 @@ begin
 			done => done_aux
         );
 
-end architecture line_drawer_tb_arq;
+end architecture line_plotter_tb_arq;

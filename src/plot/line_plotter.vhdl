@@ -1,4 +1,4 @@
--- line drawer
+-- line plotter
 --
 -- it represents the component in charge of
 -- drawing a line from (x0, y0) to (x1, y1)
@@ -10,7 +10,7 @@ library IEEE;
     use IEEE.std_logic_1164.all;
     use IEEE.numeric_std.all;
 
-entity line_drawer is
+entity line_plotter is
 	generic(
 		DATA_SIZE  : natural := 1;
 		PIXEL_SIZE : natural := 2
@@ -28,9 +28,9 @@ entity line_drawer is
 		start    : in std_logic;
 		done     : out std_logic
 	);
-end entity line_drawer;
+end entity line_plotter;
 
-architecture line_drawer_arq of line_drawer is
+architecture line_plotter_arq of line_plotter is
 
 	signal in_loop : std_logic := '0';
 	signal finished : std_logic := '0';
@@ -46,7 +46,7 @@ architecture line_drawer_arq of line_drawer is
 	signal right, down : std_logic;
 
 	type state is (IDLE_STATE, RUNNING_STATE, DONE_STATE);
-    signal drawer_state : state;
+    signal plotter_state : state;
 
 begin
 
@@ -57,8 +57,8 @@ begin
 	--
 	-- FSM variables setup
 	--
-	done <= '1' when drawer_state = DONE_STATE else '0';
-	in_loop <= '1' when drawer_state = RUNNING_STATE else '0';
+	done <= '1' when plotter_state = DONE_STATE else '0';
+	in_loop <= '1' when plotter_state = RUNNING_STATE else '0';
 
 	--
 	-- FSM process representing
@@ -68,28 +68,28 @@ begin
 	FSM_loop : process (clk, rst) is
 	begin
 		if rst = '1' then
-			drawer_state <= IDLE_STATE;
+			plotter_state <= IDLE_STATE;
 		elsif rising_edge(clk) then
-			case drawer_state is
+			case plotter_state is
 				when IDLE_STATE =>
 					if start = '1' then
-						drawer_state <= RUNNING_STATE;
+						plotter_state <= RUNNING_STATE;
 					else
-						drawer_state <= IDLE_STATE;
+						plotter_state <= IDLE_STATE;
 					end if;
 				when RUNNING_STATE =>
 					if finished = '1' then
-						drawer_state <= DONE_STATE;
+						plotter_state <= DONE_STATE;
 					else
-						drawer_state <= RUNNING_STATE;
+						plotter_state <= RUNNING_STATE;
 					end if;
 				when DONE_STATE =>
 					if start = '0' then
-						drawer_state <= IDLE_STATE;
+						plotter_state <= IDLE_STATE;
 					elsif start = '1' then
-						drawer_state <= RUNNING_STATE;
+						plotter_state <= RUNNING_STATE;
 					else
-						drawer_state <= DONE_STATE;
+						plotter_state <= DONE_STATE;
 					end if;
 			end case;
 		end if;
@@ -169,4 +169,4 @@ begin
 		end if;
 	end process;
 
-end architecture line_drawer_arq;
+end architecture line_plotter_arq;
