@@ -1,6 +1,6 @@
-# rotation-3D
+# 3D-rotation
 
-VHDL implementation of the 3D rotation graphical motor using the _CORDIC_ algorithm.
+VHDL implementation of a 3D rotation graphical motor using the _CORDIC_ algorithm.
 
 ## Setup
 
